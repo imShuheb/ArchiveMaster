@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiveMaster</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Component CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/titlebar.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/controls.css">
+    <link rel="stylesheet" href="css/progress.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/history.css">
+    <link rel="stylesheet" href="css/settings-page.css">
+    <link rel="stylesheet" href="css/dialog.css">
+</head>
+<body>
+
+    <!-- App Shell -->
+    <div id="titlebar-root"></div>
+
+    <div class="app-wrapper">
+        <div id="sidebar-root"></div>
+        <main class="page-content">
+            <div id="page-organize" class="page-container"></div>
+            <div id="page-history" class="page-container hidden"></div>
+            <div id="page-settings" class="page-container hidden"></div>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- JS Modules -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

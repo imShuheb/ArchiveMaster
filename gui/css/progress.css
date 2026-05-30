@@ -1,0 +1,158 @@
+/* ===== Progress Section ===== */
+.progress-card { animation: winuiFadeIn var(--duration-slow) var(--ease-default); }
+
+@keyframes winuiFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Status Badge */
+.status-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--bg-mica);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-default);
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all var(--duration-normal) var(--ease-default);
+}
+.status-badge.running { background: var(--accent-light); color: var(--accent); border-color: var(--accent-subtle); }
+.status-badge.paused { background: var(--warning-bg); color: var(--warning); border-color: var(--warning-border); }
+.status-badge.done { background: var(--success-bg); color: var(--success); border-color: var(--success-border); }
+.status-badge.error { background: var(--error-bg); color: var(--error); border-color: var(--error-border); }
+.status-badge.cancelled { background: var(--bg-mica); color: var(--text-tertiary); border-color: var(--border-default); }
+
+/* Progress Bar (Windows 11 thin) */
+.progress-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+.progress-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border-default);
+    border-radius: 100px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    border-radius: 100px;
+    transition: width 0.3s var(--ease-default);
+}
+.progress-fill.done { background: var(--success); }
+.progress-fill.error { background: var(--error); }
+.progress-fill.paused { background: var(--warning); }
+.progress-pct {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 44px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Current file & meta row */
+.progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+    gap: var(--space-lg);
+}
+
+.progress-current-file {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.progress-speed-eta {
+    display: flex;
+    gap: var(--space-lg);
+    font-size: 12px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.progress-speed-eta span {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Control buttons (pause/cancel) */
+.progress-controls {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+}
+
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.stat-tile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-mica);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+}
+.stat-tile-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    background: var(--bg-solid);
+    border: 1px solid var(--border-default);
+}
+.stat-tile-icon.scanned { color: var(--accent); }
+.stat-tile-icon.copied { color: var(--success); background: var(--success-bg); border-color: var(--success-border); }
+.stat-tile-icon.duplicates { color: var(--warning); background: var(--warning-bg); border-color: var(--warning-border); }
+.stat-tile-icon.skipped { color: var(--error); background: var(--error-bg); border-color: var(--error-border); }
+
+.stat-tile-info { display: flex; flex-direction: column; }
+.stat-tile-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+.stat-tile-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* Memory bar */
+.memory-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-subtle);
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.memory-label { flex-shrink: 0; }
+.memory-value { font-weight: 600; color: var(--text-primary); font-variant-numeric: tabular-nums; }

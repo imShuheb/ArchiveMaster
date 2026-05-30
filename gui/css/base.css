@@ -1,0 +1,165 @@
+/* ===== Windows 11 Fluent Design Tokens ===== */
+:root {
+    /* Surface & Background (Mica) */
+    --bg-mica: #f3f3f3;
+    --bg-solid: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-secondary: #f9f9f9;
+    --bg-smoke: rgba(0, 0, 0, 0.3);
+
+    /* Acrylic */
+    --bg-acrylic: rgba(249, 249, 249, 0.82);
+    --bg-acrylic-dark: rgba(32, 32, 32, 0.035);
+
+    /* Text */
+    --text-primary: #1a1a1a;
+    --text-secondary: #5e5e5e;
+    --text-tertiary: #9e9e9e;
+    --text-disabled: #c4c4c4;
+    --text-on-accent: #ffffff;
+
+    /* Accent (Windows 11 Blue) */
+    --accent: #005fb8;
+    --accent-hover: #004e9a;
+    --accent-pressed: #003d7a;
+    --accent-light: #e8f1fb;
+    --accent-subtle: #cce4f7;
+
+    /* Borders */
+    --border-default: #e5e5e5;
+    --border-strong: #c4c4c4;
+    --border-subtle: #f0f0f0;
+    --border-card: rgba(0, 0, 0, 0.056);
+
+    /* Semantic */
+    --success: #0f7b0f;
+    --success-bg: #dff6dd;
+    --success-border: #9ad69a;
+    --warning: #9d5d00;
+    --warning-bg: #fff4ce;
+    --warning-border: #ffe5a0;
+    --error: #c42b1c;
+    --error-bg: #fde7e9;
+    --error-border: #f5c5c5;
+    --info: #005fb8;
+    --info-bg: #e8f1fb;
+    --info-border: #a8ccef;
+
+    /* Elevation */
+    --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-4: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-8: 0 4px 8px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-16: 0 8px 16px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-toast: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+
+    /* Radii (WinUI 3) */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Spacing */
+    --space-2xs: 2px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 48px;
+
+    /* Layout */
+    --titlebar-h: 40px;
+    --sidebar-w: 200px;
+
+    /* Motion (Fluent) */
+    --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-fast: 0.1s;
+    --duration-normal: 0.2s;
+    --duration-slow: 0.35s;
+}
+
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI Variable', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-mica);
+    color: var(--text-primary);
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.app-wrapper {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.page-content {
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-2xl) 40px var(--space-3xl);
+    overflow-y: auto;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.page-container > * {
+    flex-shrink: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Scrollbar (Windows 11 thin) */
+.page-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.page-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.page-content::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 100px;
+}
+
+.page-content::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* Toast container — fixed position top-right */
+.toast-container {
+    position: fixed;
+    top: calc(var(--titlebar-h) + 12px);
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    pointer-events: none;
+}
+
+.toast-container>* {
+    pointer-events: auto;
+}

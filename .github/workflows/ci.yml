@@ -1,0 +1,98 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            sep: ';'
+            artifact_name: ArchiveMaster-Windows
+            pre_install: ''
+          - os: ubuntu-latest
+            sep: ':'
+            artifact_name: ArchiveMaster-Linux
+            pre_install: 'sudo apt-get update && sudo apt-get install -y libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0'
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Linux System Dependencies
+      if: matrix.pre_install != ''
+      run: ${{ matrix.pre_install }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 pyinstaller
+
+    - name: Lint with flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Build Executable with PyInstaller
+      run: |
+        python -m PyInstaller --noconfirm --onedir --windowed --add-data "gui${{ matrix.sep }}gui/" --name "ArchiveMaster" app.py
+
+    - name: Build Windows Installer (Inno Setup)
+      if: matrix.os == 'windows-latest'
+      run: iscc installer.iss
+
+    - name: Zip Portable App (Windows)
+      if: matrix.os == 'windows-latest'
+      run: Compress-Archive -Path dist\ArchiveMaster -DestinationPath dist\ArchiveMaster-Windows-Portable.zip
+
+    - name: Compress Portable App (Linux)
+      if: matrix.os == 'ubuntu-latest'
+      run: tar -czvf dist/ArchiveMaster-Linux-Portable.tar.gz -C dist ArchiveMaster
+
+    - name: Upload Portable Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.artifact_name }}-Portable
+        path: dist/*Portable*
+
+    - name: Upload Windows Installer Artifact
+      if: matrix.os == 'windows-latest'
+      uses: actions/upload-artifact@v3
+      with:
+        name: ArchiveMaster-Windows-Installer
+        path: dist/ArchiveMaster_Setup.exe
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/ArchiveMaster-Windows-Installer/ArchiveMaster_Setup.exe
+            artifacts/ArchiveMaster-Windows-Portable/ArchiveMaster-Windows-Portable.zip
+            artifacts/ArchiveMaster-Linux-Portable/ArchiveMaster-Linux-Portable.tar.gz
+          draft: false
+          prerelease: false
