@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="app.png" width="128" alt="ArchiveMaster Logo">
   <h1>🗄️ ArchiveMaster</h1>
   <p><strong>The smart, lightning-fast native desktop application to organize your digital life.</strong></p>
   
@@ -6,6 +7,14 @@
   [![Release](https://img.shields.io/github/v/release/imShuheb/ArchiveMaster?color=blue)](https://github.com/imShuheb/ArchiveMaster/releases)
   [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)](#)
 </div>
+
+---
+
+## 📸 Screenshots
+
+| Organize | History | Settings |
+| :---: | :---: | :---: |
+| <img src="gui/assets/SS1.png" width="300"/> | <img src="gui/assets/SS2.png" width="300"/> | <img src="gui/assets/SS3.png" width="300"/> |
 
 ---
 
@@ -74,13 +83,13 @@ Use PyInstaller to bundle the code into a standalone portable folder:
 
 **Windows:**
 ```bash
-python -m PyInstaller --noconfirm --onedir --windowed --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui;gui/" --name "ArchiveMaster" app.py
+python -m PyInstaller --noconfirm --onedir --windowed --icon=app.ico --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui;gui/" --name "ArchiveMaster" app.py
 ```
 *(Your compiled app will be located in `dist/ArchiveMaster/ArchiveMaster.exe`)*
 
 **Linux:**
 ```bash
-python -m PyInstaller --noconfirm --onedir --windowed --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui:gui/" --name "ArchiveMaster" app.py
+python -m PyInstaller --noconfirm --onedir --windowed --icon=app.ico --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui:gui/" --name "ArchiveMaster" app.py
 ```
 *(Your compiled app will be located in `dist/ArchiveMaster/ArchiveMaster`)*
 
