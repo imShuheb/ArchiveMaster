@@ -12,9 +12,17 @@
 
 ## 📸 Screenshots
 
-| Organize | History | Settings |
-| :---: | :---: | :---: |
-| <img src="gui/assets/SS1.png" width="300"/> | <img src="gui/assets/SS2.png" width="300"/> | <img src="gui/assets/SS3.png" width="300"/> |
+### Organize Media
+![Organize Media](gui/assets/SS2.png)
+*The main dashboard where you can easily select your source and destination folders, toggle file types, and monitor real-time deduplication progress.*
+
+### Session History
+![Session History](gui/assets/SS1.png)
+*A persistent log of all your past organization runs, detailing exactly how much data was processed and saved over time.*
+
+### Application Settings
+![Application Settings](gui/assets/SS3.png)
+*Customize your experience with advanced duplication rules, appearance themes, and logging preferences.*
 
 ---
 
