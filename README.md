@@ -2,8 +2,8 @@
   <h1>🗄️ ArchiveMaster</h1>
   <p><strong>The smart, lightning-fast desktop application to organize your digital life.</strong></p>
   
-  [![Build Status](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions)
-  [![Release](https://img.shields.io/github/v/release/YOUR_USERNAME/YOUR_REPO?color=blue)](https://github.com/YOUR_USERNAME/YOUR_REPO/releases)
+  [![Build Status](https://github.com/imShuheb/ArchiveMaster/actions/workflows/ci.yml/badge.svg)](https://github.com/imShuheb/ArchiveMaster/actions)
+  [![Release](https://img.shields.io/github/v/release/imShuheb/ArchiveMaster?color=blue)](https://github.com/imShuheb/ArchiveMaster/releases)
   [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)](#)
 </div>
 
@@ -26,7 +26,7 @@ It recursively scans any folder you point it to, identifies duplicates with cryp
 
 ## 📥 Download & Install
 
-Head over to the [Releases Page](https://github.com/YOUR_USERNAME/YOUR_REPO/releases) to download the latest version!
+Head over to the [Releases Page](https://github.com/imShuheb/ArchiveMaster/releases) to download the latest version!
 
 ### Windows
 Download `ArchiveMaster_Setup.exe` and run it to install the application to your Start Menu. Alternatively, download the `Windows-Portable.zip` if you don't want to install anything.

@@ -33,7 +33,7 @@ pip install pyinstaller
 **2. Compile the Portable App**
 Run PyInstaller to bundle the code into a folder:
 ```bash
-python -m PyInstaller --noconfirm --onedir --windowed --add-data "gui;gui/" --name "ArchiveMaster" app.py
+python -m PyInstaller --noconfirm --onedir --windowed --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui;gui/" --name "ArchiveMaster" app.py
 ```
 *Your compiled portable app will be located in `dist/ArchiveMaster/ArchiveMaster.exe`.*
 
@@ -65,6 +65,6 @@ pip install pyinstaller
 **3. Compile the App**
 *Note: Linux uses a colon `:` as the file separator in PyInstaller instead of a semicolon `;`.*
 ```bash
-python -m PyInstaller --noconfirm --onedir --windowed --add-data "gui:gui/" --name "ArchiveMaster" app.py
+python -m PyInstaller --noconfirm --onedir --windowed --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui:gui/" --name "ArchiveMaster" app.py
 ```
 *Your compiled Linux binary will be located in `dist/ArchiveMaster/ArchiveMaster`.*
