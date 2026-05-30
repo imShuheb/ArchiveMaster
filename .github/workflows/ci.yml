@@ -85,6 +85,8 @@ jobs:
     needs: build
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -92,11 +94,11 @@ jobs:
           path: artifacts
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/ArchiveMaster-Windows-Installer/ArchiveMaster_Setup.exe
-            artifacts/ArchiveMaster-Windows-Portable/ArchiveMaster-Windows-Portable.zip
-            artifacts/ArchiveMaster-Linux-Portable/ArchiveMaster-Linux-Portable.tar.gz
+            artifacts/**/*.exe
+            artifacts/**/*.zip
+            artifacts/**/*.tar.gz
           draft: false
           prerelease: false
