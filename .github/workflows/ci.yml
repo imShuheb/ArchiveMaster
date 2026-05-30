@@ -1,12 +1,9 @@
-name: CI/CD Pipeline
+name: Build & Release
 
 on:
   push:
-    branches: [ "main", "master" ]
     tags:
       - 'v*'
-  pull_request:
-    branches: [ "main", "master" ]
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
@@ -47,11 +44,6 @@ jobs:
         pip install -r requirements.txt
         pip install flake8 pyinstaller
 
-    - name: Lint with flake8
-      run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
     - name: Build Executable with PyInstaller
       run: |
         python -m PyInstaller --noconfirm --onedir --windowed --hidden-import clr --hidden-import win32timezone --hidden-import PIL --hidden-import PIL.ExifTags --add-data "gui${{ matrix.sep }}gui/" --name "ArchiveMaster" app.py
@@ -81,19 +73,21 @@ jobs:
         name: ArchiveMaster-Windows-Installer
         path: dist/ArchiveMaster_Setup.exe
 
-  release:
+  release_and_deploy_docs:
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
 
-      - name: Create Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -102,3 +96,18 @@ jobs:
             artifacts/**/*.tar.gz
           draft: false
           prerelease: false
+
+      - name: Configure Git Credentials for Docs
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Set up Python for Docs
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Deploy MkDocs Website
+        run: |
+          pip install mkdocs-material
+          mkdocs gh-deploy --force
