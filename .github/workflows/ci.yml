@@ -73,7 +73,7 @@ jobs:
         name: ArchiveMaster-Windows-Installer
         path: dist/ArchiveMaster_Setup.exe
 
-  release_and_deploy_docs:
+  release:
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -96,18 +96,3 @@ jobs:
             artifacts/**/*.tar.gz
           draft: false
           prerelease: false
-
-      - name: Configure Git Credentials for Docs
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-
-      - name: Set up Python for Docs
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-
-      - name: Deploy MkDocs Website
-        run: |
-          pip install mkdocs-material
-          mkdocs gh-deploy --force
