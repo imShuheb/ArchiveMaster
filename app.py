@@ -109,14 +109,20 @@ class Api:
 
     def pick_folder(self) -> str:
         """Open a native OS folder picker dialog. Returns path or empty string."""
-        if _window is None:
+        import subprocess
+        try:
+            # sys.executable is the python interpreter in dev, and ArchiveMaster.exe in compiled mode
+            flags = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
+            result = subprocess.run(
+                [sys.executable, "--pick-folder"],
+                capture_output=True,
+                text=True,
+                creationflags=flags
+            )
+            return result.stdout.strip()
+        except Exception as e:
+            print("Dialog error:", e)
             return ""
-        result = _window.create_file_dialog(
-            webview.FileDialog.FOLDER, allow_multiple=False
-        )
-        if result and len(result) > 0:
-            return result[0]
-        return ""
 
     # ------------------------------------------------------------------ #
     #  System Info
@@ -227,4 +233,18 @@ def main():
 
 
 if __name__ == "__main__":
+    if "--pick-folder" in sys.argv:
+        try:
+            import tkinter as tk
+            from tkinter import filedialog
+            root = tk.Tk()
+            root.withdraw()
+            root.attributes('-topmost', True)
+            folder_path = filedialog.askdirectory(parent=root, title="Select Folder")
+            root.destroy()
+            print(folder_path, end="")
+        except Exception:
+            pass
+        sys.exit(0)
+
     main()
